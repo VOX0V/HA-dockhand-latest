@@ -1,5 +1,11 @@
 # Home Assistant Dockhand App
 
+[![](https://img.shields.io/badge/status-experimental-orange?style=for-the-badge)](https://github.com/alexschwantes/home-assistant-dockhand-app)
+
+> **⚠️ Experimental Stage**
+>
+> This project is in an **experimental** stage. Features and behavior may change at any time. Use with caution and provide feedback or issues if you encounter problems.
+
 [![GitHub Release][releases-shield]][releases]
 ![Project Stage][project-stage-shield]
 
