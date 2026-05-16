@@ -22,12 +22,5 @@
 - Persistent data stored in `/data` (SQLite database)
 - Accessible via HA Ingress sidebar — no separate login required
 
-## Architecture
-
-| Architecture | Supported |
-| ------------ | --------- |
-| aarch64      | ✅        |
-| amd64        | ✅        |
-
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg

@@ -1,11 +1,7 @@
 <p align="center">
-  <a href="https://www.home-assistant.io/">
-    <img src="home-assistant-logo.svg" alt="Home Assistant Logo" height="60" />
-  </a>
+  <a href="https://www.home-assistant.io/"><img src="home-assistant-logo.svg" alt="Home Assistant Logo" height="60" /></a>
   &nbsp;&nbsp;<img src="plus-icon.svg" alt="Plus" height="30" />&nbsp;&nbsp;
-  <a href="https://github.com/Finsys/dockhand">
-    <img src="dockhand-logo.webp" alt="Dockhand Logo" height="60" />
-  </a>
+  <a href="https://github.com/Finsys/dockhand"><img src="dockhand/logo.png" alt="Dockhand Logo" height="60" /></a>
 </p>
 
 # Home Assistant Dockhand App
