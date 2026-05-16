@@ -10,6 +10,11 @@ SOCKET_PATH="/var/run/docker.sock"
 APP_USER="dockhand"
 DYNAMIC_GROUP="dockersock"
 
+if [[ "$(id -u)" -ne 0 ]]; then
+    bashio::log.warning "Not running as root; cannot modify group membership for Docker socket access"
+    exit 0
+fi
+
 if [[ ! -S "${SOCKET_PATH}" ]]; then
     bashio::log.warning "Docker socket not found at ${SOCKET_PATH}; skipping permission mapping"
     exit 0
@@ -30,13 +35,19 @@ if [[ -z "${GROUP_NAME}" ]]; then
         groupdel "${GROUP_NAME}" || true
     fi
 
-    groupadd -g "${SOCKET_GID}" "${GROUP_NAME}"
+    if ! groupadd -g "${SOCKET_GID}" "${GROUP_NAME}"; then
+        bashio::log.warning "Unable to create group ${GROUP_NAME} (gid ${SOCKET_GID}); skipping Docker socket permission mapping"
+        exit 0
+    fi
     bashio::log.info "Created group ${GROUP_NAME} with gid ${SOCKET_GID} for Docker socket access"
 fi
 
 if id -nG "${APP_USER}" | tr ' ' '\n' | grep -Fxq "${GROUP_NAME}"; then
     bashio::log.info "${APP_USER} already has Docker socket group access (${GROUP_NAME})"
 else
-    usermod -aG "${GROUP_NAME}" "${APP_USER}"
+    if ! usermod -aG "${GROUP_NAME}" "${APP_USER}"; then
+        bashio::log.warning "Unable to add ${APP_USER} to group ${GROUP_NAME}; continuing without dynamic socket mapping"
+        exit 0
+    fi
     bashio::log.info "Granted ${APP_USER} access to Docker socket via group ${GROUP_NAME}"
 fi

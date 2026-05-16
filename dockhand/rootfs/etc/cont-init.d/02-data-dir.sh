@@ -5,4 +5,6 @@
 bashio::log.info "Initialising data directory..."
 
 mkdir -p /data/db
-chown -R dockhand:dockhand /data
+if ! chown -R dockhand:dockhand /data; then
+	bashio::log.warning "Unable to chown /data to dockhand:dockhand (likely restricted mount permissions); continuing"
+fi
