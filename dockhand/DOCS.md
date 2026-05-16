@@ -61,3 +61,29 @@ port 8099. This means Dockhand is only reachable through your Home Assistant ins
 - **Assets or routing issues**: Dockhand may need a `BASE_PATH` environment variable for
   sub-path aware routing if Ingress path rewriting causes issues. Check the Dockhand
   documentation for available environment variables.
+
+## Known Issues
+
+- **First page load after install/start can be slow**:
+  The first Dockhand UI load after a fresh install or app restart can take several seconds (for example around 5s) while server-side components warm up.
+
+    Subsequent page loads are typically much faster.
+
+    Treat it as actionable if slow loads continue on every request, or if requests time out
+    repeatedly after the initial warm-up.
+
+- **Ingress stream disconnect noise when navigating between pages**:
+  In some Home Assistant installations, long-lived API stream requests can log transient
+  disconnects when a page is closed, refreshed, or changed.
+
+    You may see one or more of the following:
+    - Browser DevTools: `(failed) net::ERR_FAILED` for endpoints such as `/api/events` or
+      `/api/*/stream`
+    - Supervisor logs:
+      `Stream error with http://<addon-ip>:8099/api/...: Cannot write to closing transport`
+
+    This is usually benign if the UI remains responsive and streams reconnect when returning
+    to the page.
+
+    Treat it as actionable only if streams do not reconnect, live data stops updating, or the
+    UI becomes unresponsive.
