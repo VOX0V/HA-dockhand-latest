@@ -73,6 +73,20 @@
         "panel": "new"
       },
       "problemMatcher": []
+    },
+    {
+      "label": "Release App",
+      "type": "shell",
+      "command": "./scripts/release.sh ${input:releaseVersion}",
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
     }
   ],
   "inputs": [
@@ -89,6 +103,11 @@
       "type": "promptString",
       "description": "Hostname or IP of the real HA instance",
       "default": "homeassistant.local"
+    },
+    {
+      "id": "releaseVersion",
+      "type": "promptString",
+      "description": "Release version (example: 1.0.2)"
     }
   ]
 }

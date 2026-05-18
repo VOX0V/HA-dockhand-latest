@@ -9,6 +9,10 @@ on:
       publish:
         required: true
         type: boolean
+      image_tags:
+        required: false
+        type: string
+        default: ""
 
 jobs:
   prepare:
@@ -24,6 +28,7 @@ jobs:
       url: ${{ steps.normalize.outputs.url }}
       registry_prefix: ${{ steps.normalize.outputs.registry_prefix }}
       version: ${{ steps.normalize.outputs.version }}
+      image_tags: ${{ steps.tags.outputs.image_tags }}
     steps:
       - name: Check out the repository
         uses: actions/checkout@v6.0.2
@@ -59,6 +64,27 @@ jobs:
           image-name: ${{ steps.normalize.outputs.image_name }}
           registry-prefix: ${{ steps.normalize.outputs.registry_prefix }}
 
+      - name: Resolve image tags
+        id: tags
+        env:
+          INPUT_IMAGE_TAGS: ${{ inputs.image_tags }}
+          VERSION: ${{ steps.normalize.outputs.version }}
+        run: |
+          if [[ -n "${INPUT_IMAGE_TAGS}" ]]; then
+            {
+              echo "image_tags<<EOF"
+              echo "${INPUT_IMAGE_TAGS}"
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+          else
+            {
+              echo "image_tags<<EOF"
+              echo "${VERSION}"
+              echo "latest"
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+          fi
+
   build:
     name: Build ${{ matrix.arch }} image
     needs: prepare
@@ -83,9 +109,7 @@ jobs:
           container-registry-password: ${{ secrets.GITHUB_TOKEN }}
           context: "./${{ inputs.app }}"
           image: ${{ matrix.image }}
-          image-tags: |
-            ${{ needs.prepare.outputs.version }}
-            latest
+          image-tags: ${{ needs.prepare.outputs.image_tags }}
           labels: |
             io.hass.type=app
             io.hass.name=${{ needs.prepare.outputs.name }}
@@ -109,7 +133,5 @@ jobs:
           architectures: ${{ needs.prepare.outputs.architectures }}
           container-registry-password: ${{ secrets.GITHUB_TOKEN }}
           image-name: ${{ needs.prepare.outputs.image_name }}
-          image-tags: |
-            ${{ needs.prepare.outputs.version }}
-            latest
+          image-tags: ${{ needs.prepare.outputs.image_tags }}
           registry-prefix: ${{ needs.prepare.outputs.registry_prefix }}

@@ -78,4 +78,7 @@ jobs:
     with:
       app: ${{ matrix.app }}
       publish: ${{ github.event_name == 'push' }}
+      image_tags: |
+        main
+        sha-${{ github.sha }}
     secrets: inherit

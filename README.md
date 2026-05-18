@@ -40,6 +40,10 @@ This will install Dockhand on your Home Assistant and allow you to manage everyt
 
 None yet.
 
+# Release Process
+
+See [RELEASE.md](RELEASE.md) for the release strategy, automation options, and the recommended workflow.
+
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [releases-shield]: https://img.shields.io/github/release/alexschwantes/home-assistant-dockhand-app.svg
