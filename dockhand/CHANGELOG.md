@@ -1,3 +1,8 @@
+## 1.0.1
+
+- Fix: nginx startup no longer emits `initgroups(root, 0) failed (1: Operation not permitted)` in Home Assistant addon containers.
+- Dev: Implement release process
+
 ## 1.0.0
 
 - Initial release

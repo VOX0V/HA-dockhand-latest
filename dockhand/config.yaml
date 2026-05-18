@@ -1,5 +1,5 @@
 name: Dockhand
-version: "1.0.0"
+version: "1.0.1"
 slug: dockhand
 description: "Modern Docker management UI: a lightweight Portainer alternative."
 url: "https://github.com/Finsys/dockhand"
