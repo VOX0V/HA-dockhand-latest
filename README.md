@@ -30,7 +30,7 @@ This will install Dockhand on your Home Assistant and allow you to manage everyt
 ### Manual Install
 
 1. Add this repository to your Home Assistant instance via **Settings -> Apps -> Install app -> ⋮ -> Repositories**.
-1. Click **+ Add** and paste the repository URL https://github.com/alexschwantes/home-assistant-dockhand-app into the field and click **Add**
+1. Click **+ Add** and paste the repository URL `https://github.com/alexschwantes/home-assistant-dockhand-app` into the field and click **Add**
 1. Find **Dockhand** in the App store and click **Install**.
 
 ## Running Dockhand App

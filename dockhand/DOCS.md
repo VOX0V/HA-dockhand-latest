@@ -3,7 +3,7 @@
 ## Installation
 
 1. Add this repository to your Home Assistant instance via **Settings -> Apps -> Install app -> ⋮ -> Repositories**.
-1. Click **+ Add** and paste the repository URL https://github.com/alexschwantes/home-assistant-dockhand-app into the field and click **Add**
+1. Click **+ Add** and paste the repository URL `https://github.com/alexschwantes/home-assistant-dockhand-app` into the field and click **Add**
 1. Find **Dockhand** in the App store and click **Install**.
 
 ## Running Dockhand App
@@ -41,19 +41,6 @@ You first need to add the local Home Assistant Environment:
 1. Enter a **name** and click **+ Add**
 
 > **Worthwhile setting:** Under the **Updates** tab for the environment, enable **automatic image pruning**. This will schedule a clean up of old images to prevent Home Assistant running out of space.
-
-## Troubleshooting
-
-- **App fails to start with "unprotected" error**: Protection Mode is still enabled.
-  Follow the steps above to disable it.
-- **UI loads but containers are not visible**: Confirm the Docker socket (`/var/run/docker.sock`)
-  is accessible from within the container. Check the app logs for socket-related errors.
-- **"Permission denied - check socket permissions" when adding HA environment**:
-  restart the app so startup can remap the `dockhand` user to the socket's group ID.
-  Then retry with Unix socket path `/var/run/docker.sock`.
-- **Assets or routing issues**: Dockhand may need a `BASE_PATH` environment variable for
-  sub-path aware routing if Ingress path rewriting causes issues. Check the Dockhand
-  documentation for available environment variables.
 
 ## Known Issues
 
