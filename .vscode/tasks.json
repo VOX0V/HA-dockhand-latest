@@ -76,8 +76,19 @@
     },
     {
       "label": "Release App",
-      "type": "shell",
-      "command": "./scripts/release.sh ${input:releaseVersion}",
+      "type": "process",
+      "command": "bash",
+      "args": [
+        "-lc",
+        "./scripts/release.sh ${input:releaseVersion}"
+      ],
+      "windows": {
+        "command": "C:\\Program Files\\Git\\bin\\bash.exe",
+        "args": [
+          "-lc",
+          "./scripts/release.sh ${input:releaseVersion}"
+        ]
+      },
       "group": {
         "kind": "test",
         "isDefault": false
