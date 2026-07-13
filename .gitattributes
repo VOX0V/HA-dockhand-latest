@@ -1,3 +1,0 @@
-*.sh text eol=lf
-dockhand/rootfs/etc/services.d/*/run text eol=lf
-dockhand/rootfs/etc/services.d/*/finish text eol=lf
